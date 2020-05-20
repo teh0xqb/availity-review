@@ -19,12 +19,15 @@
     padding: 1.25em 0.75em;
     display: block;
 
-    border: 1px solid #d0d0d0;
+    border: 1px solid green;
     border-radius: 2px;
 
     width: 100%;
     width: -moz-available;          /* WebKit-based browsers will ignore this. */
     width: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+}
+.input:invalid {
+    border: 1px solid #d0d0d0;
 }
 
 .input:focus {
@@ -70,7 +73,7 @@ label {
     border: none;
     padding: 1em;
     min-width: 10em;
-    margin: 2em;
+    margin: 2em auto;
     background: #f5832b;
     color: white;
     text-transform: uppercase;
@@ -78,6 +81,9 @@ label {
     font-size: 0.75em;
     border-radius: 2px;
     box-shadow: 3px 3px #E2D1EC;
+    width: 50%;
+    text-decoration: none;
+    display: block;
 }
 .register-button:hover, .register-button:focus {
     cursor: pointer;

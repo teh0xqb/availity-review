@@ -1,5 +1,8 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState } from 'react';
+import { Route, Switch, Link } from "react-router-dom";
 import './Register.css';
+import PATHS from './paths';
+import { Confirmation } from './RegistrationConfirmation';
 
 const Input = ({label, value, onChange, ...props}) => (
     <label>
@@ -28,6 +31,7 @@ export function BusinessAddress({values, handleChange}) {
                     onChange={handleChange}
                     value={values.address1}
                     name="address1"
+                    pattern="[a-zA-Z0-9]{10,}"
                     placeholder="Address 1"
                     required
                 />
@@ -43,6 +47,7 @@ export function BusinessAddress({values, handleChange}) {
                 <Input
                     onChange={handleChange}
                     value={values.state}
+                    pattern="[a-zA-Z]{2,}"
                     name="state"
                     placeholder="State"
                     required
@@ -51,6 +56,7 @@ export function BusinessAddress({values, handleChange}) {
                 <Input
                     onChange={handleChange}
                     value={values.zipCode}
+                    pattern="[0-9]{5}"
                     name="zipCode"
                     placeholder="Zip Code"
                     required
@@ -75,96 +81,131 @@ const initialValues = {
     'email': ''
 };
 
-function reducer(state, action, ...args) {
-    return {[action.name]: action.value};
-}
-
 export function Register() {
 
-    const [values, dispatch] = useReducer(reducer, initialValues);
+    const [values, setValue] = useState(initialValues);
 
-    function handleChange(e) {
-        /* e.persist(); */
+    function handleChange(event) {
+        const { target } = event;
 
-        dispatch({
-            name: e.target.name,
-            value: e.target.value
-        });
+        setValue(state => ({
+            ...state,
+            [target.name]: target.value
+        }));
+    }
+
+    /**
+     * TODO create validationPatterns that maps field names to validation
+     * to then set errors on the form. Out of scope for this exercise.
+     **/
+    function validate(event) {
+        const valid = true; // TODO Calculate and use setErrors
+
+        /* const isValid = event.target.checkValidity(); */
+        /* event.target.reportValidity(); */
+        /* const inputEl = useRef(null); */
+
+        if (!valid) {
+            event.preventDefault();
+        }
     }
 
     return (
         <div className="wrapper">
 
-            <div className="fields">
+            <Switch>
+                <Route
+                    path="/"
+                    exact>
 
-                <h3>
-                    Healthcare Provider Registration
-                </h3>
+                    <div className="fields">
 
-                <br />
+                        <h3>
+                            Healthcare Provider Registration
+                        </h3>
 
-                <div className="name-fields">
-                    <Input
-                        onChange={handleChange}
-                        value={values.firstName}
-                        name="firstName"
-                        placeholder="First Name"
-                        required />
+                        <br />
 
-                    <Input
-                        onChange={handleChange}
-                        value={values.lastName}
-                        name="lastName"
-                        placeholder="Last Name"
-                        required />
+                        <div className="name-fields">
+                            <Input
+                                onChange={handleChange}
+                                value={values.firstName}
+                                name="firstName"
+                                pattern="[a-zA-Z]{1,}"
+                                placeholder="First Name"
+                                required />
 
-                    <Input
-                        onChange={handleChange}
-                        value={values.npiNumber}
-                        name="npiNumber"
-                        placeholder="NPI Number"
-                        required />
-                </div>
+                            <Input
+                                onChange={handleChange}
+                                value={values.lastName}
+                                name="lastName"
+                                pattern="[a-zA-Z]{1,}"
+                                placeholder="Last Name"
+                                required />
 
+                            <Input
+                                onChange={handleChange}
+                                value={values.npiNumber}
+                                name="npiNumber"
+                                pattern="[0-9]{10}"
+                                placeholder="NPI Number"
+                                required />
+                        </div>
 
-                <br />
+                        <br />
 
-                <BusinessAddress
-                    handleChange={handleChange}
-                    values={values} />
+                        <BusinessAddress
+                            handleChange={handleChange}
+                            values={values} />
 
-                <br />
+                        <br />
 
-                <h3>Contact Information</h3>
+                        <h3>Contact Information</h3>
 
-                <br />
+                        <br />
 
-                <div className="contact">
-                    <Input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        placeholder="Telephone"
-                        onChange={handleChange}
-                        value={values.phone}
-                        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                        required />
+                        <div className="contact">
+                            <Input
+                                type="tel"
+                                id="phone"
+                                name="phone"
+                                placeholder="Telephone"
+                                onChange={handleChange}
+                                value={values.phone}
+                                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                                validationMessage="Please enter 123-123-1234"
+                                required />
 
-                    <Input
-                        name="email"
-                        type="email"
-                        onChange={handleChange}
-                        value={values.email}
-                        placeholder="Email"
-                        required
-                    />
-                </div>
+                            <Input
+                                name="email"
+                                type="email"
+                                onChange={handleChange}
+                                value={values.email}
+                                placeholder="Email"
+                                required
+                            />
+                        </div>
 
-            </div>
+                    </div>
 
-            <button className="register-button">
-                Register
-            </button>
+                    <Link
+                        onClick={validate}
+                        to={`${PATHS.confirmation}`}
+                        className="register-button">
+                        Register
+                    </Link>
+                </Route>
+
+                <Route
+                    path={`${PATHS.confirmation}`}
+                    exact
+                    render={props =>
+                        <Confirmation
+                            values={values}
+                            {...props} />
+                    } />
+
+            </Switch>
 
         </div>
     );
