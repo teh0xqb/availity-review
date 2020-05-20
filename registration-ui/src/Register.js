@@ -26,19 +26,19 @@ export function BusinessAddress({values, handleChange, refs}) {
                     value={values.address1}
                     name="address1"
                     ref={refs.address1}
-                    pattern="[a-zA-Z0-9]{3,}"
+                    pattern=".{3,}"
                     message="Please enter at least 3 letters for address."
                     placeholder="Address 1 *"
                     required
                 />
 
                 <input
-                    className="input"
+                    className="input optional"
                     onChange={handleChange}
                     value={values.address2}
                     ref={refs.address2}
                     name="address2"
-                    placeholder="Address 2 *"
+                    placeholder="Address 2"
                 />
 
                 <input

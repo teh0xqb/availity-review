@@ -26,6 +26,9 @@
     width: -moz-available;          /* WebKit-based browsers will ignore this. */
     width: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
 }
+.optional {
+    border: 1px solid #d0d0d0;
+}
 .input:invalid {
     border: 1px solid #d0d0d0;
 }
