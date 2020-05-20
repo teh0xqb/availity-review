@@ -153,6 +153,7 @@ The following data points should be collected:
 
 #### Solution: 
 
+- Used a theme (orange color, light background) and feel in line with what I saw at <https://availity.com>.
 - See `./registration-ui/` for the application, bootstrapped with create-react-app.
 - See `./doc/registration.png` and other screenshots of the running application.
 - See `./doc/README.md` for development notes on these exercises (mostly registration-ui).
