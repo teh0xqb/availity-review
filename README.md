@@ -112,6 +112,9 @@ function lispChecker(str) {
 }
 ```
 
+The above function is defined under ./index.js, and some tests are under ./test.js
+The tests run using mocha after installing dependencies (npm install or yarn install) on root/package.json
+
 Q: Coding exercise for frontend engineer
 
 Healthcare providers request to be part of the Availity system. Using React framework, create a registration user interface so healthcare providers can electronically join Availity.
@@ -125,3 +128,7 @@ The following data points should be collected:
 
 See ./registration-ui/ for the application, bootstrapped with create-react-app.
 See ./doc/registration.png for a screenshot of the application running.
+See ./registration-ui/README.md for installing, running for development, and building application.
+
+Notes: project contains a nested package.json. Requires another npm/yarn install within ./registration-ui/ folder.
+Solution compatible and tested with latest versions of Google Chrome and Firefox on Ubuntu Linux.
