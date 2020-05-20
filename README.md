@@ -161,7 +161,7 @@ The following data points should be collected:
 Notes: project contains a nested `package.json`. Requires another npm/yarn install within `./registration-ui/** folder.
 Solution compatible and tested with latest versions of Google Chrome and Firefox on Ubuntu Linux.
 
-![registration-ui](doc/registration.png**
+![registration-ui](doc/registration.png)
 
 ** All README.md files at different levels of this project are important in order to build,
 analyze, and preview documentation and screenshots of the project. **

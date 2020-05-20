@@ -1,7 +1,6 @@
 .wrapper {
     width: 100%;
 }
-
 @media only screen and (min-width: 1200px) {
     .wrapper {
         width: 80%;
@@ -9,6 +8,7 @@
     }
 }
 
+/*====================================================================================*/
 .fields {
     text-align: left;
 }
@@ -38,6 +38,9 @@
     box-shadow: 0 0 4px #719ECE;
 }
 
+
+/*====================================================================================*/
+
 .name-fields {
     display: grid;
     grid-auto-columns: min-content;
@@ -45,9 +48,6 @@
     grid-template-columns: 1fr 1fr;
     position: relative;
     grid-gap: 0.75em;
-}
-
-.business-address {
 }
 
 .business-fields {
@@ -58,6 +58,7 @@
     position: relative;
     grid-gap: 0.75em;
 }
+
 .contact {
     display: grid;
     grid-auto-columns: min-content;
@@ -67,10 +68,13 @@
     grid-gap: 0.75em;
 }
 
+/*======================== Quick register button styles =================*/
 
-label {
-    text-transform: uppercase;
-}
+/*
+* In a more robust application, these would either be defined globally (ala theme or sass),
+* and button variants and API encapsulated in standalone custom Button components
+* (eg ActionButton, LinkButton, PrimaryButton, and such).
+*/
 
 .register-button {
     border: none;
@@ -89,9 +93,9 @@ label {
     display: block;
 }
 .register-button:hover, .register-button:focus {
+    background: #f5a42b;
     cursor: pointer;
     outline: none;
-    background: #f5a42b;
 }
 
 .register-button:active {
