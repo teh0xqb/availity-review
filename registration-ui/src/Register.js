@@ -1,23 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, createRef, useEffect } from 'react';
 import { Route, Switch, Link } from "react-router-dom";
 import './Register.css';
 import PATHS from './paths';
 import { Confirmation } from './RegistrationConfirmation';
 
-const Input = ({label, value, onChange, ...props}) => (
-    <label>
-        {label}
+/**
+ * Sample file with registration, validation, and styling.
+ * TODO Decide if we want to create a json config and remove duplication of template.
+ *      Possibly encapsulate input as forwardRef(Input).
+ **/
 
-        <input
-            className="input"
-            value={value}
-            onChange={onChange}
-            {...props} />
-
-    </label>
-);
-
-export function BusinessAddress({values, handleChange}) {
+export function BusinessAddress({values, handleChange, refs}) {
     return (
         <div className="business-address">
             <h3>
@@ -27,38 +20,48 @@ export function BusinessAddress({values, handleChange}) {
             <br />
 
             <div className="business-fields">
-                <Input
+                <input
+                    className="input"
                     onChange={handleChange}
                     value={values.address1}
                     name="address1"
-                    pattern="[a-zA-Z0-9]{10,}"
-                    placeholder="Address 1"
+                    ref={refs.address1}
+                    pattern="[a-zA-Z0-9]{3,}"
+                    message="Please enter at least 3 letters for address."
+                    placeholder="Address 1 *"
                     required
                 />
 
-                <Input
+                <input
+                    className="input"
                     onChange={handleChange}
                     value={values.address2}
+                    ref={refs.address2}
                     name="address2"
-                    placeholder="Address 2"
-                    required
+                    placeholder="Address 2 *"
                 />
 
-                <Input
+                <input
+                    className="input"
                     onChange={handleChange}
                     value={values.state}
+                    ref={refs.state}
                     pattern="[a-zA-Z]{2,}"
+                    message="Enter at least 2 letters for state code or full state name."
                     name="state"
-                    placeholder="State"
+                    placeholder="State *"
                     required
                 />
 
-                <Input
+                <input
+                    className="input"
                     onChange={handleChange}
                     value={values.zipCode}
-                    pattern="[0-9]{5}"
+                    ref={refs.zipCode}
+                    pattern="[0-9]{5}|[0-9]{5}-[0-9]{4}"
+                    message="Enter 5 digit zip code or 5+4 code."
                     name="zipCode"
-                    placeholder="Zip Code"
+                    placeholder="Zip Code *"
                     required
                 />
 
@@ -67,26 +70,40 @@ export function BusinessAddress({values, handleChange}) {
     );
 }
 
-const initialValues = {
-    'firstName': '',
-    'lastName': '',
-    'npiNumber': '',
+const fields = [
+    'firstName',
+    'lastName',
+    'npiNumber',
 
-    'address1': '',
-    'address2': '',
-    'state': '',
-    'zipCode': '',
+    'address1',
+    'address2',
+    'state',
+    'zipCode',
 
-    'phone': '',
-    'email': ''
-};
+    'phone',
+    'email'
+];
+
+const initialValues = Object.fromEntries(fields.map(name => [name, '']));
 
 export function Register() {
 
     const [values, setValue] = useState(initialValues);
+    const [refs, setRefs] = useState({});
+
+    useEffect(() => {
+        const allRefs = {};
+        for (const fieldName of fields) {
+            allRefs[fieldName] = createRef();
+        }
+        setRefs(allRefs);
+    }, []);
 
     function handleChange(event) {
         const { target } = event;
+
+        // Don't validate on every change. We'll validate on submit.
+        target.setCustomValidity('');
 
         setValue(state => ({
             ...state,
@@ -94,19 +111,19 @@ export function Register() {
         }));
     }
 
-    /**
-     * TODO create validationPatterns that maps field names to validation
-     * to then set errors on the form. Out of scope for this exercise.
-     **/
     function validate(event) {
-        const valid = true; // TODO Calculate and use setErrors
+        for (const fieldName of fields) {
 
-        /* const isValid = event.target.checkValidity(); */
-        /* event.target.reportValidity(); */
-        /* const inputEl = useRef(null); */
+            const input = refs[fieldName].current;
+            const isInputValid = input.checkValidity();
 
-        if (!valid) {
-            event.preventDefault();
+            input.setCustomValidity(!isInputValid ? input.getAttribute('message') : '');
+
+            if (!isInputValid) {
+                input.reportValidity();
+                event.preventDefault();
+                return false;
+            }
         }
     }
 
@@ -127,28 +144,37 @@ export function Register() {
                         <br />
 
                         <div className="name-fields">
-                            <Input
+                            <input
+                                className="input"
                                 onChange={handleChange}
                                 value={values.firstName}
                                 name="firstName"
+                                ref={refs.firstName}
                                 pattern="[a-zA-Z]{1,}"
-                                placeholder="First Name"
+                                message="First name must be a name."
+                                placeholder="First Name *"
                                 required />
 
-                            <Input
+                            <input
+                                className="input"
                                 onChange={handleChange}
                                 value={values.lastName}
                                 name="lastName"
+                                ref={refs.lastName}
+                                message="Last name must be a name of at least one character."
                                 pattern="[a-zA-Z]{1,}"
-                                placeholder="Last Name"
+                                placeholder="Last Name *"
                                 required />
 
-                            <Input
+                            <input
+                                className="input"
                                 onChange={handleChange}
                                 value={values.npiNumber}
+                                ref={refs.npiNumber}
                                 name="npiNumber"
-                                pattern="[0-9]{10}"
-                                placeholder="NPI Number"
+                                pattern="[0-9]{3,}"
+                                placeholder="NPI Number *"
+                                message="Must enter at least 3 numbers."
                                 required />
                         </div>
 
@@ -156,7 +182,8 @@ export function Register() {
 
                         <BusinessAddress
                             handleChange={handleChange}
-                            values={values} />
+                            values={values}
+                            refs={refs} />
 
                         <br />
 
@@ -165,25 +192,28 @@ export function Register() {
                         <br />
 
                         <div className="contact">
-                            <Input
+                            <input
+                                className="input"
                                 type="tel"
-                                id="phone"
                                 name="phone"
-                                placeholder="Telephone"
+                                ref={refs.phone}
+                                placeholder="Telephone *"
                                 onChange={handleChange}
                                 value={values.phone}
-                                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                                validationMessage="Please enter 123-123-1234"
+                                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}|[0-9]{10}"
+                                message="Please enter 10 digits or digits with format: xxx-xxx-xxxx"
                                 required />
 
-                            <Input
+                            <input
+                                className="input"
                                 name="email"
                                 type="email"
                                 onChange={handleChange}
+                                ref={refs.email}
                                 value={values.email}
-                                placeholder="Email"
-                                required
-                            />
+                                message="Email must include an '@' and letters afterwards."
+                                placeholder="Email *"
+                                required />
                         </div>
 
                     </div>
