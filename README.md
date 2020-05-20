@@ -1,19 +1,20 @@
 # Availity
 
-Q: Tell me about your proudest professional achievement.  It can be a personal or school project.
+### Q: Tell me about your proudest professional achievement.  It can be a personal or school project.
 
     - DataStax's Product & Engineering All-Star Award
-      - Award given for collaborating on the bootstraping of two new SaaS applications, while creating and maintaining a shared library of React widgets for company use.
+      - Award given for collaborating on the bootstraping of two new SaaS applications, 
+      while creating and maintaining a shared library of React widgets for company use.
       - Additionally, lead these projects when the opportunity presented itself.
       - + Gaining recognition from my mentors at the company.
 
-Q: Tell me a about a book, blog, article or GitHub repo you read or liked recently, and why you like it and why you should recommend I do the same.
+### Q: Tell me a about a book, blog, article or GitHub repo you read or liked recently, and why you like it and why you should recommend I do the same.
 
 Oh, have I got a lot to share on this department:
 
 A Book: `Clojure in Action`
 
-### Why you should read it
+#### Why you should read it
 
 Besides being a book that touches on a different and powerful programming language, Clojure, and functional programming, it includes concepts such as: sane approach to concurrency with incredible concurrency primitives (software transactional memory features, no locks involved), an explanation on multiple types of polymorphism where, for example, subtype polymorphism is the most common form of polymorphism (included in Java and C++), but not the only one available.
 
@@ -77,11 +78,11 @@ Github repo:
   the original shape and desired shape, and the program transforms the data for the user. Declarative programming
   taken to the next level.
 
-Q: If you were to describe to a 7-year old what Availity does, what would you say?
+### Q: If you were to describe to a 7-year old what Availity does, what would you say?
 
 Availity helps doctors charge daddy's payments. We can all buy more ice cream with the time and money saved.
 
-Q: Coding exercise: You are tasked to write a checker that validates the parentheses of a LISP code. Write a program (in Java or JavaScript) which takes in a string as an input and returns true if all the parentheses in the string are properly closed and nested.
+### Q: Coding exercise: You are tasked to write a checker that validates the parentheses of a LISP code. Write a program (in Java or JavaScript) which takes in a string as an input and returns true if all the parentheses in the string are properly closed and nested.
 
 ```js
 /**
@@ -115,7 +116,7 @@ function lispChecker(str) {
 The above function is defined under ./index.js, and some tests are under ./test.js
 The tests run using mocha after installing dependencies (npm install or yarn install) on root/package.json
 
-Q: Coding exercise for frontend engineer
+### Q: Coding exercise for frontend engineer
 
 Healthcare providers request to be part of the Availity system. Using React framework, create a registration user interface so healthcare providers can electronically join Availity.
 
