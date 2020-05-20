@@ -111,3 +111,16 @@ function lispChecker(str) {
     return !stack.length;
 }
 ```
+
+Q: Coding exercise for frontend engineer
+
+Healthcare providers request to be part of the Availity system. Using React framework, create a registration user interface so healthcare providers can electronically join Availity.
+
+The following data points should be collected:
+- First and Last Name
+- NPI number
+- Business Address
+- Telephone Number
+- Email address
+
+See ./registration-ui for the application, bootstrapped with crete-react-app.

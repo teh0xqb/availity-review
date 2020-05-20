@@ -1,0 +1,91 @@
+.wrapper {
+    width: 100%;
+}
+
+@media only screen and (min-width: 1200px) {
+    .wrapper {
+        width: 80%;
+        margin: auto;
+    }
+}
+
+.fields {
+    text-align: left;
+}
+
+.input {
+    height: 2.3em;
+    font-size: 0.8em;
+    padding: 1.25em 0.75em;
+    display: block;
+
+    border: 1px solid #d0d0d0;
+    border-radius: 2px;
+
+    width: 100%;
+    width: -moz-available;          /* WebKit-based browsers will ignore this. */
+    width: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+}
+
+.input:focus {
+    outline: none !important;
+    box-shadow: 0 0 4px #719ECE;
+}
+
+.name-fields {
+    display: grid;
+    grid-auto-columns: min-content;
+    grid-auto-rows: min-content;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    grid-gap: 0.75em;
+}
+
+.business-address {
+}
+
+.business-fields {
+    display: grid;
+    grid-auto-columns: min-content;
+    grid-auto-rows: min-content;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    grid-gap: 0.75em;
+}
+.contact {
+    display: grid;
+    grid-auto-columns: min-content;
+    grid-auto-rows: min-content;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    grid-gap: 0.75em;
+}
+
+
+label {
+    text-transform: uppercase;
+}
+
+.register-button {
+    border: none;
+    padding: 1em;
+    min-width: 10em;
+    margin: 2em;
+    background: #f5832b;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 0.75em;
+    border-radius: 2px;
+    box-shadow: 3px 3px #E2D1EC;
+}
+.register-button:hover, .register-button:focus {
+    cursor: pointer;
+    outline: none;
+    background: #f5a42b;
+}
+
+.register-button:active {
+    box-shadow: 2px 2px #b8acbf;
+    transform: translateY(2px);
+}
