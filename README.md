@@ -169,7 +169,7 @@ The following data points should be collected:
 - See `./doc/README.md` for development notes on these exercises (mostly registration-ui).
 - See `./registration-ui/README.md` for installing, running for development, and building application.
 
-Notes: project contains a nested `package.json`. Requires another npm/yarn install within `./registration-ui/** folder.
+Notes: project contains a nested `package.json`. Requires another npm/yarn install within `./registration-ui/` folder.
 Solution compatible and tested with latest versions of Google Chrome and Firefox on Ubuntu Linux.
 
 ![registration-ui](doc/registration.png)
