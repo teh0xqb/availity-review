@@ -41,7 +41,14 @@ function debug(dataStructure) {
 /**
 * Given a string, scans content and checkes whether parentheses are balanced, ala LISP.
 **/
-export function lispChecker(str) {
+export function lispChecker(targetString) {
+
+    const str = targetString.trim();
+
+    if (str[0] !== '(') {
+        // no opening parens means not valid lisp
+        return false;
+    }
 
     const stack = [];
 
@@ -55,7 +62,10 @@ export function lispChecker(str) {
             stack.push(value);
         }
         if (value === ')') {
-            stack.pop();
+            // more closing parens than opening yields undefined from pop
+            if (!stack.pop()) {
+                return false;
+            }
         }
         char = iterator.next();
     }

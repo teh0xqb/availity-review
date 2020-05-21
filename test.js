@@ -4,7 +4,7 @@ import { lispChecker } from './';
 const { expect } = chai;
 
 describe('lispChecker', () => {
-    it('given a valid lisp parens pairs, returns true', () => {
+    it('given valid lisp with balanced parentheses, returns true', () => {
 
         const input = `
           (defn lazy-message-seq (list channel consumer)
@@ -17,8 +17,36 @@ describe('lispChecker', () => {
         expect(output).to.be.ok;
     });
 
-    it('given unbalanced lisp parens, returns false', () => {
+    it('given unclosed opening lisp parens, returns false', () => {
         const input = `(a (b (c (d)))`;
+        const output = lispChecker(input);
+
+        expect(output).to.be.not.ok;
+    });
+
+    it('given more closing parentheses at the start, returns false', () => {
+        const input = `))()`;
+        const output = lispChecker(input);
+
+        expect(output).to.be.not.ok;
+    });
+
+    it('given more closing parentheses at the start, returns false', () => {
+        const input = `a`;
+        const output = lispChecker(input);
+
+        expect(output).to.be.not.ok;
+    });
+
+    it('never closes', () => {
+        const input = `(a`;
+        const output = lispChecker(input);
+
+        expect(output).to.be.not.ok;
+    });
+
+    it('extra closing', () => {
+        const input = `(a))`;
         const output = lispChecker(input);
 
         expect(output).to.be.not.ok;

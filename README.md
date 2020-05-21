@@ -109,7 +109,14 @@ With all of this, we can all buy more ice cream, and be healthier, with the time
 * Given a string, scans content and checkes whether parentheses are balanced, ala LISP.
 * Assumptions: very simple LISP. No difference between atoms and functions. No strings allowed.
 **/
-function lispChecker(str) {
+function lispChecker(targetString) {
+
+    const str = targetString.trim();
+
+    if (str[0] !== '(') {
+        // no opening parens means not valid lisp
+        return false;
+    }
 
     const stack = [];
 
@@ -123,7 +130,10 @@ function lispChecker(str) {
             stack.push(value);
         }
         if (value === ')') {
-            stack.pop();
+            // more closing parens than opening yields undefined from pop
+            if (!stack.pop()) {
+                return false;
+            }
         }
         char = iterator.next();
     }
