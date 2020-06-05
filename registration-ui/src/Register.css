@@ -23,9 +23,9 @@
     border-radius: 2px;
 
     width: 100%;
-    width: -moz-available;          /* WebKit-based browsers will ignore this. */
-    width: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
 }
+
+
 .optional {
     border: 1px solid #d0d0d0;
 }
@@ -67,6 +67,13 @@
     position: relative;
     grid-gap: 0.75em;
 }
+
+@media only screen and (max-width: 450px) {
+    .name-fields, .business-fields, .contact {
+        grid-template-columns: 1fr;
+    }
+}
+
 
 /*======================== Quick register button styles =================*/
 
